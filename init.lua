@@ -40,6 +40,16 @@ require('lazy').setup({
         enabled = true,
         event = 'VimEnter',
         requires = { 'nvim-lua/plenary.nvim' }
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        lazy = false,
     }
 })
 
@@ -48,3 +58,16 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+vim.api.nvim_set_keymap("n", "<leader>l", ":Neotree toggle<CR>", { noremap = true, silent = true })
+
+-- auto-close neotree on select
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    if vim.bo.buftype == '' then
+      vim.cmd('Neotree close')
+    end
+  end,
+})
+
+
