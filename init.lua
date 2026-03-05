@@ -3,6 +3,7 @@ local cfgutils = require('cfgutils')
 cfgutils.setTabWidth(4)
 vim.o.expandtab = true
 
+vim.g.mapleader = ','
 vim.o.number = true
 vim.o.mouse = ''
 vim.o.showmode = false
